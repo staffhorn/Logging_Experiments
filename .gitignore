@@ -128,6 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+
+# GSL: Stuff added by Scott
 logs/*
 
 
