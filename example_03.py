@@ -15,6 +15,8 @@ With basicConfig() we can easily annotate each log message with a the root logge
 Here we add a timestamp, information about the software and the logger, and the level of the message.
 '''
 
+LOGGING_LEVEL = logging.INFO
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
-logging.basicConfig(level=logging.INFO, format=FORMAT)
-logging.info('This uses the root logger with formatting. Note the information logging adds for us.')
+
+logging.basicConfig(level=LOGGING_LEVEL, format=FORMAT)
+logging.info('This uses the root logger with a custom format. Note the information logging adds for us.')

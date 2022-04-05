@@ -15,13 +15,13 @@ FILENAME='logs/example.log'
 
 def configure_logger() -> logging.Logger:
     '''
-    We completely customize our logger:
+    We customize our logger:
      - set level to DEBUG
-     - log formatted messages to a file.
+     - create a custom formatter
+     - create a custom handler to send log messages to a file.
     '''
 
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
     handler = logging.FileHandler(filename=FILENAME, mode='a')
     formatter = logging.Formatter(fmt=FORMAT)
     handler.setFormatter(fmt=formatter)
@@ -31,4 +31,5 @@ def configure_logger() -> logging.Logger:
 
 if __name__ == "__main__":
     logger = configure_logger()
+    logger.setLevel(logging.DEBUG)
     logger.debug("Let's see what got logged, ok?")

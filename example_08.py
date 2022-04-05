@@ -3,12 +3,17 @@
  SPDX-License-Identifier: Apache-2.0
 """
 import logging
-from logging_tree import printout
-from example_07 import configure_logger
+import logging_tree
+import example_07
 
-LOGGING_LEVEL = logging.DEBUG
+LOGGING_LEVEL = logging.INFO
+'''
+Example 08
+Create a tree view of the logging configuration from Example 07 using the python logging_tree module.'''
 
 if __name__=="__main__":
-    logging.basicConfig(level=LOGGING_LEVEL)
-    logger = configure_logger()
-    printout()
+    logging.basicConfig(level=LOGGING_LEVEL,format="%(message)s")
+    logger = example_07.configure_logger()
+    logging.info("Here is a view of the logging tree:\n\n")
+    logging_tree.printout()
+    logging.info("\n\n")
