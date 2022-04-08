@@ -55,8 +55,4 @@ def configure_smtp_logger(logger:logging.Logger, notify_list=None) -> logging.Lo
     return logger
 
 if __name__ == "__main__":
-    '''
-    Run some test examples from function docstrings.
-    '''
-    import doctest
-    doctest.testmod()
+    pass

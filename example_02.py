@@ -13,9 +13,10 @@ NOTES:
 The logging module sets up a very basic root logger for us automatically.
 We access the root logger with logging level calls, logging.basicConfig() and logging.debug()
 In this case, we change the level to DEBUG.  We will talk about levels later.
-This is about as easy to set up and use as print(), and easier when we deploy to operations,
-we'll see.
+This is just as easy to set up and use as print().
 '''
 
-logging.basicConfig(level=logging.DEBUG)
-logging.debug('This uses the root logger.')
+LOGGING_LEVEL = logging.DEBUG
+
+logging.basicConfig(level=LOGGING_LEVEL, format='')
+logging.debug('This example uses the root logger to send simple messages to stderr.')

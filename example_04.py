@@ -18,13 +18,6 @@ Notice we didn't give the custom logger a format, so it inherits the format of t
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
 LOGGING_LEVEL = logging.DEBUG
 
-def configure_logger() :
-    logger = logging.getLogger(__name__)
-    logger.setLevel(LOGGING_LEVEL)
-    return logger
-
-
-
 if __name__=="__main__":
     # Configure the root logger, set to the level of INFO, and will filter out debug messages.
 
@@ -33,9 +26,11 @@ if __name__=="__main__":
     # Now configure a custom logger, and set it to DEBUG.
     # Inherit the custom format from the root logger.
 
-    logger = configure_logger()
+    logger = logging.getLogger(__name__)
+    logger.setLevel(LOGGING_LEVEL)
+
     logger.debug('The custom logger is set to a level of DEBUG.')
 
-    # Since the root logger is set to INFO, debug messages will not print.
+    # Since the root logger is set to INFO, debug messages will not appear.
 
-    logging.debug('We will not see this.')
+    logging.debug('We will not see this because DEBUG is lower than INFO.')

@@ -1,2 +1,2 @@
-# Logging
-Custom logging setup for multiple projects
+# Logging Examples
+Examples for python logging.

@@ -16,38 +16,39 @@ In example 09, we send screen output to sys.stdout
 
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
 FILENAME='logs/example.log'
-
 CUSTOM_LEVEL = logging.DEBUG
 
-def configure_logger() -> logging.Logger:
+formatter = logging.Formatter(fmt=FORMAT)
+
+def configure_screen_handler() -> logging.Handler:
     '''
-    Create a logger and configure handlers to route messages to stdout and to a file
+    handlers to route messages to stdout and to a file
     '''
 
     logger = logging.getLogger(name=__name__)
     logger.setLevel(CUSTOM_LEVEL)
 
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(CUSTOM_LEVEL)
+
+    return handler
+
+def configure_file_handler() -> logging.Handler:
     '''
-    We add two handlers to logger
-    - one for the screen (debug and above)
-    - one for a file (info and above).
+    handlers to route messages to stdout and to a file
     '''
-
-    formatter = logging.Formatter(fmt=FORMAT)
-
-    screen_handler = logging.StreamHandler(sys.stdout)
-    screen_handler.setLevel(CUSTOM_LEVEL)
-    logger.addHandler(screen_handler)
-
-    file_handler = logging.FileHandler(filename=FILENAME, mode='a')
-    file_handler.setLevel(logging.INFO)
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
-    return logger
+ 
+    handler = logging.FileHandler(filename=FILENAME, mode='a')
+    handler.setLevel(logging.INFO)
+    handler.setFormatter(formatter)
+    return handler
 
 if __name__ == '__main__':
     # The root logger will still go to sys.stderr, since we don't override the default.
     logging.basicConfig(level=CUSTOM_LEVEL, format='%(message)s')  
-    logger = configure_logger()
+    logger = logging.getLogger()
+    logger.addHandler(configure_screen_handler())
+    logger.addHandler(configure_file_handler)
+
     logging.info('The new tree:\n\n')
     logging_tree.printout()
