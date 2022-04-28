@@ -11,11 +11,15 @@ A logger that sends debug messages to the screen and info messages to a file
 '''
 
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
-FILENAME='logs/example.log'
+FILENAME='logs/example_07.log'
 
 CUSTOM_LEVEL = logging.DEBUG
 formatter = logging.Formatter(fmt=FORMAT)
 
+def get_logger() -> logging.getLogger:
+    logger =  logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    return logger
 
 def configure_file_handler() -> logging.Handler:
 
@@ -34,8 +38,7 @@ def configure_screen_handler() -> logging.Handler:
     return screen_handler
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.WARNING)
-    logger = logging.getLogger(__name__)
+    logger = get_logger()
     logger.addHandler(configure_screen_handler())
     logger.addHandler(configure_file_handler())
 

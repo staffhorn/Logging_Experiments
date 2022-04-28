@@ -19,4 +19,4 @@ LOGGING_LEVEL = logging.INFO
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
 
 logging.basicConfig(level=LOGGING_LEVEL, format=FORMAT)
-logging.info('This uses the root logger with a custom format. Note the information that logging adds for us.')
+logging.info('This uses the root logger with a custom format, adding context information to each message.')

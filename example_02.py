@@ -19,4 +19,4 @@ This is just as easy to set up and use as print().
 LOGGING_LEVEL = logging.DEBUG
 
 logging.basicConfig(level=LOGGING_LEVEL, format='')
-logging.debug('This example uses the root logger to send simple messages to stderr.')
+logging.info('This example uses the root logger to send simple messages to stderr.')

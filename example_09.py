@@ -4,51 +4,40 @@
 """
 
 import logging
-import logging_tree
-import sys
+from logging.handlers import SMTPHandler
+import os
 
 '''
 Example 09
-A logger that sends debug messages to the screen and info messages to a file.
-In example 08, we could see that the default stream for StreamHandler is sys.stderr.
-In example 09, we send screen output to sys.stdout
+Configure logging to send email via a gmail account.
 '''
 
-FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
-FILENAME='logs/example.log'
-CUSTOM_LEVEL = logging.DEBUG
+SUBJECT='Alert'
 
-formatter = logging.Formatter(fmt=FORMAT)
 
-def configure_screen_handler() -> logging.Handler:
-    '''
-    handlers to route messages to stdout and to a file
-    '''
+def configure_smtp_handler(notify_list=None) -> logging.Handler:
 
-    logger = logging.getLogger(name=__name__)
-    logger.setLevel(CUSTOM_LEVEL)
+    sender = os.environ['gmail_app_sender']
+    if notify_list is None: notify_list=[sender]
 
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(CUSTOM_LEVEL)
+    smtp_handler = SMTPHandler(mailhost=('smtp.gmail.com', 587), 
+        fromaddr=sender,
+        toaddrs=notify_list,
+        subject=SUBJECT,
+        credentials = ( sender, os.environ['gmail_app_pass']),
+        secure=()
+    )
 
-    return handler
+    formatter = logging.Formatter(fmt='"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"')
+    smtp_handler.setFormatter(fmt=formatter)
+    smtp_handler.setLevel(logging.ERROR)
+    return smtp_handler
 
-def configure_file_handler() -> logging.Handler:
-    '''
-    handlers to route messages to stdout and to a file
-    '''
- 
-    handler = logging.FileHandler(filename=FILENAME, mode='a')
-    handler.setLevel(logging.INFO)
-    handler.setFormatter(formatter)
-    return handler
 
-if __name__ == '__main__':
-    # The root logger will still go to sys.stderr, since we don't override the default.
-    logging.basicConfig(level=CUSTOM_LEVEL, format='%(message)s')  
+if __name__=="__main__":
+    logging.basicConfig(format='')
+    
     logger = logging.getLogger()
-    logger.addHandler(configure_screen_handler())
-    logger.addHandler(configure_file_handler)
+    logger.addHandler(configure_smtp_handler())
+    logger.error('''Simulated alert. There is no emergency.''')
 
-    logging.info('The new tree:\n\n')
-    logging_tree.printout()
