@@ -5,14 +5,12 @@
 
 '''
 Example 02a
-Display the logging configuration of example 02 with  the logging_tree module.
+Change logging level to suppress debugging messages.
 '''
 
 import logging
-from logging_tree import printout
 
-LOGGING_LEVEL = logging.DEBUG
+LOGGING_LEVEL = logging.INFO
 
 logging.basicConfig(level=LOGGING_LEVEL, format='')
-logging.info('\n\n Basic config: root logger, Stream Handler, output just the message to stderr.\n')
-printout()
+logging.debug('This debug uses the root logger to send simple messages.')

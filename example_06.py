@@ -4,6 +4,7 @@
 """
 
 import logging
+from operator import le
 
 '''
 Example 06
@@ -11,11 +12,17 @@ Customize our logger with a file handler and a formatter.
 '''
 
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
-FILENAME='logs/example.log'
+FILENAME='logs/example_06.log'
+LEVEL=logging.DEBUG
+
+my_logger = None
 
 def get_logger() -> logging.getLogger:
-    logger =  logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
+    if my_logger is None:
+        logger =  logging.getLogger(__name__)
+        logger.setLevel(LEVEL)
+    else:
+        logger = my_logger
     return logger
 
 def configure_handler() -> logging.Handler:
@@ -27,7 +34,7 @@ def configure_handler() -> logging.Handler:
     '''
     
     handler = logging.FileHandler(filename=FILENAME, mode='a')
-    handler.setLevel(logging.DEBUG)
+    handler.setLevel(LEVEL)
     handler.setFormatter(fmt=logging.Formatter(FORMAT))
     return handler
 
@@ -38,4 +45,5 @@ def example_06_work():
     logger.debug(f"Debug messages go to the file {FILENAME}")
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     example_06_work()

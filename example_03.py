@@ -8,11 +8,7 @@ import logging
 
 '''
 Example 03
-Add formatting to the root logger with logging.basicConfig()
-
-NOTES:
-With basicConfig() we can easily annotate each log message with the root logger's formatter. 
-Here we add a timestamp, information about the software and the logger, and the level of the message.
+Add formatting to the root logger with logging.basicConfig() and a custom format string.
 '''
 
 LOGGING_LEVEL = logging.INFO

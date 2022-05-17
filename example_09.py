@@ -20,7 +20,8 @@ def configure_smtp_handler(notify_list=None) -> logging.Handler:
     sender = os.environ['gmail_app_sender']
     if notify_list is None: notify_list=[sender]
 
-    smtp_handler = SMTPHandler(mailhost=('smtp.gmail.com', 587), 
+    smtp_handler = SMTPHandler(
+        mailhost=('smtp.gmail.com', 587), 
         fromaddr=sender,
         toaddrs=notify_list,
         subject=SUBJECT,

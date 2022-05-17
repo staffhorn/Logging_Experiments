@@ -5,7 +5,7 @@
 
 '''
 Example 06a
-import example_06 as a module and use its confuration function.
+import example_06 as a module.
 '''
 
 import logging

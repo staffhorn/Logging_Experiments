@@ -12,8 +12,8 @@ A logger that sends debug messages to the screen and info messages to a file
 
 FORMAT = '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
 FILENAME='logs/example_07.log'
-
 CUSTOM_LEVEL = logging.DEBUG
+
 formatter = logging.Formatter(fmt=FORMAT)
 
 def get_logger() -> logging.getLogger:
@@ -42,5 +42,5 @@ if __name__ == "__main__":
     logger.addHandler(configure_screen_handler())
     logger.addHandler(configure_file_handler())
 
-    logger.debug("Helpful debugging messages go only to screen if level is DEBUG.")
+    logger.debug('debug')
     logger.info("Info messages go to screen and file")

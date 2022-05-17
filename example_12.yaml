@@ -1,0 +1,37 @@
+---
+version: 1
+formatters:
+  simple:
+    format: '"%(message)s"'
+  detailed:
+    format: '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
+handlers:
+  console_1:
+    class: logging.StreamHandler
+    formatter: simple
+    level: DEBUG
+    stream: ext://sys.stdout
+  console_2:
+    class: logging.StreamHandler
+    formatter: detailed
+    level: WARNING
+    stream: ext://sys.stdout
+  email:
+    class: logging.handlers.SMTPHandler
+    mailhost: !!python/tuple
+      - smtp.gmail.com
+      - 587
+    fromaddr: slett.holisticmath.com
+    toaddrs:
+      - scott.holistic@gmail.com
+    subject: Alert from Holistic Mathematics.
+    level: ERROR
+    secure: !!python/tuple
+      - 
+loggers:
+  root:
+    handlers:
+    - console_1
+    - console_2
+    - email
+    level: INFO

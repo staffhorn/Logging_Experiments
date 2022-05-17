@@ -4,25 +4,23 @@
 """
 
 import logging
+from logging.config import dictConfig
+import yaml
+import os
 
 '''
 Example 12
 Logging configuration with logging.dictConfig
 '''
 
-LOGGING_CONFIG = '''
-version: 1
-formatters:
-    simple:
-        format: '"%(asctime)s",%(module)s,%(name)s,%(levelname)s,"%(message)s"'
-handlers:
-    console:
-        class: logging.StreamHandler
-        level: DEBUG
-        formatter: simple
-        stream: ext://sys.stdout
-loggers:
-    
-    
+with open('example_12.yaml','r') as config_file:
+    my_config = yaml.load(config_file, yaml.Loader)
 
-'''
+my_config['handlers']['email']['credentials'] = (os.environ['gmail_app_sender'], os.environ['gmail_app_pass'])
+dictConfig(my_config)
+del my_config
+
+logging.debug('debug')
+logging.info('info')
+logging.warning('warning')
+logging.error('error')
