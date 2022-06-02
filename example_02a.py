@@ -5,12 +5,11 @@
 
 '''
 Example 02a
-Change logging level to suppress debugging messages.
+Change logging level INFO to suppress DEBUG messages.
 '''
 
 import logging
 
-LOGGING_LEVEL = logging.INFO
+logging.basicConfig(level=logging.INFO)
 
-logging.basicConfig(level=LOGGING_LEVEL, format='')
-logging.debug('This debug uses the root logger to send simple messages.')
+logging.debug('This debug uses the root logger.')

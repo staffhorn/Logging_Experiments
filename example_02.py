@@ -3,18 +3,16 @@
  SPDX-License-Identifier: Apache-2.0
 """
 
-import logging
-
 '''
 Example 02
 Log to the screen with the root logger.
 
 NOTES:
-This is just as easy to set up and use as print().
+This is almost as easy to set up and use as print().
 '''
 
-LOGGING_LEVEL = logging.DEBUG
-logging.basicConfig(level=LOGGING_LEVEL,format='')
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 
-logging.debug('This debug uses the root logger to send simple messages.')
+logging.debug('This debug message uses the root logger.')
